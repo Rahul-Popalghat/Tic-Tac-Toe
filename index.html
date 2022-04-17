@@ -1,37 +1,224 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+<style>
+*{padding: 0px;margin: 0px; box-sizing: border-box; background-color:green;}
+body{display: flex; justify-content: center;}
+form{display: inline-flex;flex-direction: column; background:green; border: white solid; justify-content: space-around;width:max-content; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); padding:30px;}
+#grid{ width: 500px; flex-wrap: wrap; justify-content: space-around; text-align: center;margin-top: 1vw;}
+.grid{width:30%;aspect-ratio: 1; justify-content:center; background:black; color:aqua; margin:auto; align-self:center; font-size: 5vw; border:solid white;}
+.grid:hover{
 
-You can use the [editor on GitHub](https://github.com/Rahul-Popalghat/Tic-Tac-Toe/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+}
+#btn-area{width: 100%; text-align: center; margin-top:1vw;}
+#btn-area > input{width:50%; margin-left:25%; justify-content: center; }
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+button{font-size: xx-large; text-align: center;}
+#dummy{width:100%; height:100%; position:absolute; background: rgba(0, 0, 0, 0.6); z-index: 1000; left:0px; top:0px;display: flex; justify-content: space-evenly; text-align: center;flex-direction:column ; }
+#startBtn, #resetBtn{width:40%; margin-top: 2vh; background: green; color: aqua; border: solid white; padding:10px 30px;align-self: center;}
+#resetBtn{display: none;}
+#msg {color: white; font-size: xx-large;}
+#msg2{color: white; font-size: xx-large; background:transparent;align-self: center;}
+#playerName{width: 70%; display: flex; flex-wrap: wrap; justify-content: space-between; align-self: center;color: white; font-size: xx-large; background:transparent;}
+#playerName > input{color: white; font-size: xx-large; background:transparent; width: 30%;}
+#playerName > input:focus{background:white; color:green; }
+</style>
 
-### Markdown
+</head>
+<body>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<div style="position:fixed;color: white;">You Can Edit Player Name by clicking on it</div>
 
-```markdown
-Syntax highlighted code block
+<form id="frm">
+    <div id="dummy"><div id="playerName">
+<input type="text" id="player1" value="Player 1"> Vs
+<input type="text" id="player2" value="Player 2">
+    </div> <div id="msg2"> </div><button type="reset" id="startBtn">Start Game</button></div>
+<section id="grid">
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+<button type="button"  class="grid">.</button>
+</section>    
+<section id="btn-area">
+    <h1 id="msg"></h1>
+<button type="reset" id="resetBtn" onclick="window.location.reload()">Restart</button>
 
-# Header 1
-## Header 2
-### Header 3
+</section>
 
-- Bulleted
-- List
+</form>
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+<script>
+var startBtn = document.getElementById('startBtn');
+var playerName = document.getElementById('playerName');
+var resetBtn = document.getElementById('resetBtn');
+var grid = document.getElementsByClassName('grid');
+var Player1 = 'Player 1';
+var Player2 = 'Player2';
+var gridSection = document.getElementById('grid');
+var msg = document.getElementById('msg');
+var msg2 = document.getElementById('msg2');
+var frm = document.getElementById('frm');
+var dummy = document.getElementById('dummy');
+var count =0;
+var count1 = 0;
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+var ip = document.getElementById('playerName');
 
-### Jekyll Themes
+for(let i =0; i < ip.children.length; i++){
+ip.children[i].addEventListener('change', () =>{
+    if(i == 0){Player1 = ip.children[i].value; }else{Player1 = ip.children[i].value;}
+} );
+}
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Rahul-Popalghat/Tic-Tac-Toe/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+startBtn.addEventListener('click', function(e){
+    Player1 = document.getElementById('player1').value;
+    Player2 = document.getElementById('player2').value;
+    count1 += 1;
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+    e.preventDefault();
+    if(count1%2 == 0){window.location.reload()}else{
+    msg.innerHTML = `${Player1} s turn `;
+dummy.style.display ='none';
+resetBtn.style.display ='inline-block';
+}
+})
+
+
+for(let i =0; i < grid.length; i++){
+grid[i].addEventListener('click', addvalue);
+}
+
+
+
+
+
+function addvalue(e){
+count += 1;
+
+
+var target = e.target;
+if(count%2 == 0 && e.target.value == '' ){
+   msg.innerHTML = `${Player1} s turn `;    
+  console.log("turn2 " + count);
+  target.value='X';
+target.innerHTML = 'X';
+target.disabled = 'true';
+let result = getResult();
+if(result){
+    Winner(result);
+}
+
+}else if(count%2 != 0 && e.target.value == ''){
+    msg.innerHTML = `${Player2} s turn `;
+    console.log("turn1 "+ count )
+      target.value='O';
+    target.innerHTML = 'O';
+    target.disabled = 'true';
+    let result = getResult();
+if(result){
+    Winner(result);
+}else if(count == 9){ Winner('draw');
+} 
+    }
+}
+
+
+function getResult(){
+
+  if ((grid[0].value == grid[1].value) && (grid[1].value == grid[2].value) ){
+//console.log(`${grid[0].value} is winner `);
+return `${grid[0].value}`;
+} else if ((grid[3].value == grid[4].value) && (grid[4].value == grid[5].value)){
+//console.log(`${grid[3].value} is winner `);
+return `${grid[3].value}`;
+}else if ((grid[6].value == grid[7].value) &&  (grid[7].value == grid[8].value)){
+//console.log(`${grid[6].value} is winner `);
+return `${grid[6].value}`;    
+} else if ((grid[0].value == grid[3].value) && (grid[3].value == grid[6].value)){
+//console.log(`${grid[0].value} is winner `);
+return `${grid[0].value}`;
+} else if ((grid[1].value == grid[4].value) && (grid[4].value == grid[7].value)){
+//console.log(`${grid[1].value} is winner `);
+return `${grid[1].value}`;
+} else if ((grid[2].value == grid[5].value) && (grid[5].value == grid[8].value)){
+//console.log(`${grid[2].value} is winner `);
+return `${grid[2].value}`;
+} else if ((grid[0].value == grid[4].value) && (grid[4].value == grid[8].value)){
+//console.log(`${grid[0].value} is winner `);
+return `${grid[0].value}`;
+} else if ((grid[2].value == grid[4].value) && (grid[4].value == grid[6].value)){
+//console.log(`${grid[2].value} is winner `);
+return `${grid[2].value}`;
+}
+
+
+}
+
+function Winner(name){
+//disable grid
+
+switch(name){
+case 'O':
+    console.log('Player1 winner');
+    disableGrid();
+    setTimeout(firstWinner, 1000);
+    break;
+case 'X':
+    console.log('Player2 winner');
+    disableGrid();
+    setTimeout(secondWinner, 1000);
+    break;
+default:
+case 'draw':
+    matchDraw();
+    break;
+console.log('Error Occured');
+    disableGrid();
+setTimeout(window.location.reload(), 6000);
+    break;
+
+
+}
+}
+
+
+
+function firstWinner(){
+    disableGrid()
+dummy.style.display = 'flex';
+msg2.innerHTML = `${Player1} is Winner`;
+}
+
+function secondWinner(){
+    disableGrid()
+    dummy.style.display = 'flex';
+msg2.innerHTML = `${Player2} is Winner`;
+}
+
+function matchDraw(){
+    disableGrid()
+    dummy.style.display = 'flex';
+    startBtn.innerHTML = 'Play Again';  
+    msg2.innerHTML = ` Well Played ! but Unfortuntely \n Match Draw `;
+}
+
+function disableGrid(){
+for(let i =0; i < grid.length; i++){grid[i].disabled = 'true'}
+}
+</script>
+
+</body>
+</html>
