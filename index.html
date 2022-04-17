@@ -12,7 +12,7 @@ form{display: inline-flex;flex-direction: column; background:green; border: whit
 #grid{ width: 500px; flex-wrap: wrap; justify-content: space-around; text-align: center;margin-top: 1vw;}
 .grid{width:30%;aspect-ratio: 1; justify-content:center; background:black; color:black; margin:auto; align-self:center; font-size: 5vw; border:solid white; }
 .grid:hover{
-
+cursor: pointer;
 }
 #btn-area{width: 100%; text-align: center; margin-top:1vw;}
 #btn-area > input{width:50%; margin-left:25%; justify-content: center; }
@@ -24,10 +24,10 @@ button{font-size: xx-large; text-align: center;}
 #msg {color: white; font-size: xx-large;}
 #msg2{color: white; font-size: xx-large; background:transparent;align-self: center;}
 #playerName{width: 70%; display: flex; flex-wrap: wrap; justify-content: space-between; align-self: center;color: white; font-size: xx-large; background:transparent;}
-#playerName > input{color: white; font-size: xx-large; background:transparent; width: 30%;}
+#playerName > input{color:aqua; font-size: xx-large; background:green; width: 30%;}
 #playerName > input:focus{background:white; color:green; }
 #nm{color:white; background:black;text-decoration: underline; font-size: xx-large; font-weight: 900;}
-   #Player2, #Player1{background:aqua; color:white;}
+
 </style>
 
 </head>
@@ -109,17 +109,13 @@ for(let i =0; i < grid.length; i++){
 grid[i].addEventListener('click', addvalue);
 }
 
-
-
-
-
 function addvalue(e){
 count += 1;
 
 
 var target = e.target;
 if(count%2 == 0 && e.target.value == '' ){
-   msg.innerHTML = `${Player1} s turn `;
+   msg.innerHTML = `${Player1} s turn `;    
   target.value='X';
 target.innerHTML = 'X';
 target.style.color = 'white';
@@ -132,7 +128,7 @@ if(result){
 
 }else if(count%2 != 0 && e.target.value == ''){
     msg.innerHTML = `${Player2} s turn `;
-    target.value='O';
+      target.value='O';
     target.innerHTML = 'O';
     target.style.color = 'white';
     target.disabled = 'true';
