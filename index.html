@@ -8,8 +8,8 @@
 <style>
 *{padding: 0px;margin: 0px; box-sizing: border-box; background-color:green;}
 body{display: flex; justify-content: center;}
-form{display: inline-flex; width:500px; flex-direction: column; background:green; border: white solid; justify-content: space-around;width:max-content; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); padding:1vw;}
-#grid{ width: 95vw;  flex-wrap: wrap; justify-content: space-around; text-align: center;margin-top: 1vw;}
+form{display: inline-flex;width:95vw; max-width:500px; flex-direction: column; background:green; border: white solid; justify-content: space-around;width:max-content; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); padding:1vw;}
+#grid{ width: 100%;  flex-wrap: wrap; justify-content: space-around; text-align: center;margin-top: 1vw;}
 .grid{width:25%;aspect-ratio: 1; justify-content:center; background:black; color:black; margin:auto; align-self:center; font-size: 5vw; border:solid white; }
 .grid:hover{
 cursor: pointer;
@@ -28,9 +28,6 @@ button{ text-align: center;}
 #playerName > input:focus{background:white; color:green; }
 #nm{color:white; background:black;text-decoration: underline; font-size: large; font-weight: 900;}
 
-@media screen and (min-width: 480px) {
-    #frm{width:100vw;}
-}
 </style>
 
 </head>
