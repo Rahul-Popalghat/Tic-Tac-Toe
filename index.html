@@ -6,112 +6,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
 <style>
-*{padding: 0px;margin: 0px; box-sizing: border-box; background-color:green;}
-body{display: flex; justify-content: center;}
-form{display: inline-flex; width:95vw; min-width:240px; max-width:500px;  flex-direction: column; background:green; border: white solid; justify-content: space-around;width:max-content; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); padding:1vw;}
-#grid{ width: 100%;  flex-wrap: wrap; justify-content: space-around; text-align: center;margin-top: 1vw;}
-.grid{width:25%;aspect-ratio: 1; justify-content:center; background:black; color:black; margin:auto; align-self:center; font-size: 5vw; border:solid white; }
-.grid:hover{
-cursor: pointer;
+*{padding: 0px;margin: 0px; box-sizing: border-box; font-size: 1.5vw;}
+body{ background: rgba(100 ,10 , 0, 0.3); text-align: center; max-width: 100vw; max-height: 100vh;}
+#frm, #nameEdit, #btn-area, #dummy{display: block;}
+#frm{width:50vw; margin:auto; border: solid whitesmoke; position: absolute; top:50%; left: 50%; transform: translate(-50% , -50%);}
+#nameEdit{text-align: center;padding:1vw;}
+#dummy, #game{text-align: center; aspect-ratio: 1; display: flex;  flex-direction: column;}
+#dummy{justify-content: space-around; background: rgba(100 ,0 , 0,0.5); color:white;}
+#dummy button, #resetBtn, #playAgainBtn{width:fit-content;align-self: center; color: white; }
+#startBtn {padding: 3vw 5vw; background: royalblue; font-weight: 800; font-size: 150%;}
+#resetBtn, #playAgainBtn {padding: 1vw 3vw ; margin: 2vw;}
+#playAgainBtn{background: royalblue;}
+#resetBtn{background: rgba(100 ,10 , 0, 0.5);}
+.nm{font-weight: 800; font-size: 3vw; padding: 2vw; text-decoration:underline; color:rgba(85, 55, 115, 1)}
+#game{justify-content: space-between;}
+#gridArea{display: flex; flex-wrap:wrap;}
+#gridArea > .grid{width:33%; aspect-ratio: 1; margin: auto;}
+input{text-align: center; background: royalblue; color: white;}
+#game{display: none;}
+#msgBox{ border:white solid; background: rgba(100 ,0 , 0,1);  position: absolute; left:50%; top: 50%; transform: translate(-50%, -50%); display: none; padding: 3vw; }
+#message{padding:4vw; color: white;}
+.player1,.player2{font-weight: 800; font-size:500%; }
+.player1{background:royalblue;}
+.player2{background:rgba(100 ,0 , 0,1);}
+.grid:hover{ font-weight: 800; font-size:500%;
 }
-#btn-area{width: 100%; text-align: center; margin-top:1vw;}
-#btn-area > input{width:50%; margin-left:25%; justify-content: center; }
+button:disabled > .player2 {background:rgba(100 ,0 , 0,1);}
+button:disabled > .player1 {background:royalblue; }
 
-button{ text-align: center;}
-#dummy{width:100%; height:100%; position:absolute; background: black; z-index: 1000; left:0px; top:0px;display: flex; justify-content: space-evenly; text-align: center;flex-direction:column ; }
-#startBtn, #resetBtn{width:40%; margin-top: 2vh; background: green; color: aqua; border: solid white; padding:10px 30px;align-self: center;}
-#resetBtn{display: none;}
-#msg {color: white; }
-#msg2{color: white;background:transparent;align-self: center;}
-#playerName{width: 70%; display: flex; flex-wrap: wrap; justify-content: space-between; align-self: center;color: white;  background:transparent;}
-#playerName > input{color:aqua; background:green; width: 30%;}
-#playerName > input:focus{background:white; color:green; }
-#nm{color:white; background:black;text-decoration: underline; }
+@media screen and (max-width: 600px) {
+  #frm{width:95vw;}
+}
 
 </style>
 
 </head>
 <body>
-<div style='width:100vw; height: 100vh;'>
 
-<div style="position:fixed;color: white;">You Can Edit Player Name by clicking on it</div>
+<div id="nameEdit">You Can Edit Player Name by clicking on it</div>
 
 <form id="frm">
-    <div id="dummy"><div id="nm">Tic-Tac-Toe</div><div id="playerName">
-<input type="text" id="Player1" value="Player 1"> Vs
-<input type="text" id="Player2" value="Player 2">
-    </div> <div id="msg2"> </div><button type="reset" id="startBtn">Start Game</button></div>
-<section id="grid">
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-<button type="button"  class="grid">.</button>
-</section>    
-<section id="btn-area">
+<div id="dummy" >
+    <div class="nm">Tic-Tac-Toe</div>
+    <div id="playerName">
+        <input type="text" id="Player1" value="Player 1"><br/> Vs<br/>
+        <input type="text" id="Player2" value="Player 2">
+    </div>
+    <div id="msg2"> </div>
+    <button type="reset" id="startBtn">Start Game</button>
+</div>
+
+
+<div id="game">
+    <div class="nm">Tic-Tac-Toe</div>
+    <div id="gridArea">
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+<button type="button"  class="grid"></button>
+</div>
+<div id="msgBox">
+    <p id="message">This is Message</p> <br>
+    <button type="reset" id="playAgainBtn">Play Again</button>
+</div>
+<div id="btn-area">
     <h1 id="msg"></h1>
-<button type="reset" id="resetBtn" onclick="window.location.reload()">Restart</button>
-
-</section>
-
+    <button type="reset" id="resetBtn">Restart</button>
+    
+</div>
+</div> 
 </form>
 
-</div>
 
 <script>
 var startBtn = document.getElementById('startBtn');
-var playerName = document.getElementById('playerName');
 var resetBtn = document.getElementById('resetBtn');
+var dummy = document.getElementById('dummy');
+var game = document.getElementById('game');
+var nameEdit = document.getElementById('nameEdit');
+var msgBox = document.getElementById('msgBox');
+var message = document.getElementById('message');
+var frm = document.getElementById('frm');
+var playerName = document.getElementById('playerName');
+var playAgainBtn = document.getElementById('playAgainBtn');
+var Player1 = document.getElementById('Player1');
+var Player2 = document.getElementById('Player2');
+var savedPlayer1 = window.localStorage.getItem('Player1');
+var savedPlayer2 = window.localStorage.getItem('Player2');
+let winner1 = '';
+let winner2 = '';
 var grid = document.getElementsByClassName('grid');
 var gridSection = document.getElementById('grid');
 var msg = document.getElementById('msg');
 var msg2 = document.getElementById('msg2');
 var frm = document.getElementById('frm');
-var dummy = document.getElementById('dummy');
 var count =0;
 var count1 = 0;
-var ip = document.getElementById('playerName');
-var player1 ='';
-var Player2 ='';
-var wd = window.screen.width;
-if(wd < 500 && wd > 240) {
-frm.style.width = '95vw';
-}else if(wd > 500){frm.style.width = '500px';
-}else if(wd < 240){frm.style.width = '240px';
+var turn = '';
+
+function checkPreviousPlayer(){
+if(Player1.value != savedPlayer1){
+    Player1.value = savedPlayer1;
+}
+if(Player2.value != savedPlayer2){
+    Player2.value = savedPlayer2;
+}
 }
 
-playerName.children[0].value = window.localStorage.getItem('Player1');
-playerName.children[1].value = window.localStorage.getItem('Player2');
+playAgainBtn.addEventListener('click', resetgame);
 
-if(!playerName.children[0].value){
-    playerName.children[0].value = 'Player 1';
+startBtn.addEventListener('click' , startgame);
+resetBtn.addEventListener('click', resetgame);
+
+function resetgame(){
+    window.location.reload();
+}
+
+function startgame(e){
+dummy.style.display = 'none';
+nameEdit.style.display = 'none';
+game.style.display= 'flex';
+frm.style.border = 'none';
+window.localStorage.setItem('Player1', Player1.value);
+window.localStorage.setItem('Player2', Player2.value);
+winner1 = Player1.value;
+winner2 = Player2.value;
+
+}
+
+Player1.onchange = function(){
+if(!Player1.value){this.value = 'Player 1'}
 }
 
 
-if(!playerName.children[1].value){
-    playerName.children[1].value = 'Player 2';
+Player2.onchange = function(){
+if(!Player2.value){this.value = 'Player 2'}
 }
-
-startBtn.addEventListener('click', function(e){
-    Player1 = document.getElementById('Player1').value;
-    Player2 = document.getElementById('Player2').value;
-window.localStorage.setItem('Player1', Player1);
-window.localStorage.setItem('Player2', Player2);
-
-    count1 += 1;
-
-    e.preventDefault();
-    if(count1%2 == 0){window.location.reload()}else{
-    msg.innerHTML = `${Player1} s turn `;
-dummy.style.display ='none';
-resetBtn.style.display ='inline-block';
-}
-})
-
 
 for(let i =0; i < grid.length; i++){
 grid[i].addEventListener('click', addvalue);
@@ -120,26 +155,29 @@ grid[i].addEventListener('click', addvalue);
 function addvalue(e){
 count += 1;
 
-
 var target = e.target;
 if(count%2 == 0 && e.target.value == '' ){
-   msg.innerHTML = `${Player1} s turn `;    
-  target.value='X';
+turn = 2;
+msg.innerHTML = `${Player1.value}'s turn `;    
+target.value='X';
 target.innerHTML = 'X';
 target.style.color = 'white';
 target.disabled = 'true';
-
+e.target.classList.add('player1')
 let result = getResult();
+
 if(result){
     Winner(result);
 }
 
 }else if(count%2 != 0 && e.target.value == ''){
-    msg.innerHTML = `${Player2} s turn `;
-      target.value='O';
+    turn = 1;
+    msg.innerHTML = `${Player2.value}'s turn `;
+    target.value='O';
     target.innerHTML = 'O';
     target.style.color = 'white';
     target.disabled = 'true';
+    e.target.classList.add('player2')
     let result = getResult();
 if(result){
     Winner(result);
@@ -149,90 +187,107 @@ if(result){
 }
 
 
-function getResult(){
+ function getResult(){
 
-  if ((grid[0].value == grid[1].value) && (grid[1].value == grid[2].value) ){
-//console.log(`${grid[0].value} is winner `);
-return `${grid[0].value}`;
-} else if ((grid[3].value == grid[4].value) && (grid[4].value == grid[5].value)){
-//console.log(`${grid[3].value} is winner `);
-return `${grid[3].value}`;
-}else if ((grid[6].value == grid[7].value) &&  (grid[7].value == grid[8].value)){
-//console.log(`${grid[6].value} is winner `);
-return `${grid[6].value}`;    
-} else if ((grid[0].value == grid[3].value) && (grid[3].value == grid[6].value)){
-//console.log(`${grid[0].value} is winner `);
-return `${grid[0].value}`;
-} else if ((grid[1].value == grid[4].value) && (grid[4].value == grid[7].value)){
-//console.log(`${grid[1].value} is winner `);
-return `${grid[1].value}`;
-} else if ((grid[2].value == grid[5].value) && (grid[5].value == grid[8].value)){
-//console.log(`${grid[2].value} is winner `);
-return `${grid[2].value}`;
-} else if ((grid[0].value == grid[4].value) && (grid[4].value == grid[8].value)){
-//console.log(`${grid[0].value} is winner `);
-return `${grid[0].value}`;
-} else if ((grid[2].value == grid[4].value) && (grid[4].value == grid[6].value)){
-//console.log(`${grid[2].value} is winner `);
-return `${grid[2].value}`;
-}
-
+  if ((grid[0].value == grid[1].value) && (grid[1].value == grid[2].value)){return `${grid[0].value}`;
+} else if ((grid[3].value == grid[4].value) && (grid[4].value == grid[5].value)){return `${grid[3].value}`;
+} else if ((grid[6].value == grid[7].value) &&  (grid[7].value == grid[8].value)){return `${grid[6].value}`;    
+} else if ((grid[0].value == grid[3].value) && (grid[3].value == grid[6].value)){return `${grid[0].value}`;
+} else if ((grid[1].value == grid[4].value) && (grid[4].value == grid[7].value)){return `${grid[1].value}`;
+} else if ((grid[2].value == grid[5].value) && (grid[5].value == grid[8].value)){return `${grid[2].value}`;
+} else if ((grid[0].value == grid[4].value) && (grid[4].value == grid[8].value)){return `${grid[0].value}`;
+} else if ((grid[2].value == grid[4].value) && (grid[4].value == grid[6].value)){return `${grid[2].value}`;}
 
 }
 
 function Winner(name){
-//disable grid
 
 switch(name){
 case 'O':
-    console.log('Player1 winner');
-    disableGrid();
-    msg.innerHTML = `${Player1} Win `;
-    setTimeout(firstWinner, 1000);
+       firstWinner(name);
     break;
 case 'X':
-    console.log('Player2 winner');
-    disableGrid();
-    msg.innerHTML = `${Player2} Win `;
-    setTimeout(secondWinner, 1000);
+    secondWinner(name);
     break;
-default:
 case 'draw':
     matchDraw();
     break;
-console.log('Error Occured');
+
+default:
+    console.log('Error Occured');
     disableGrid();
-setTimeout(window.location.reload(), 6000);
+    messge("Error Occured, Game Restarting", 2000);
+    setTimeout(window.location.reload(), 6000);
     break;
-
-
 }
 }
 
 
 
-function firstWinner(){
+async function firstWinner(name){
     disableGrid()
-dummy.style.display = 'flex';
-msg2.innerHTML = `${Player1} is Winner`;
+    let messageText = `${winner1} is Winner`;
+    await messge(messageText, 000)
+    await setTimeout(resetgame, 5000)
+    setTimeout (clearGrid, 5000);
 }
 
-function secondWinner(){
+
+
+
+async function secondWinner(name){
     disableGrid()
-    dummy.style.display = 'flex';
-msg2.innerHTML = `${Player2} is Winner`;
+    let messageText = `${winner2} is Winner`;
+    await messge(messageText, 000);
+    await setTimeout(resetgame, 5000)
+    setTimeout (clearGrid, 5000);
 }
 
-function matchDraw(){
-    disableGrid()
-    dummy.style.display = 'flex';
-    startBtn.innerHTML = 'Play Again';  
-    msg2.innerHTML = ` Well Played ! but Unfortuntely \n Match Draw `;
+async function matchDraw(){
+    disableGrid();
+    let messageText = ` Well Played ! but Unfortuntely \n Match Draw `;  
+    await messge(messageText, 000)
+    await setTimeout(resetgame, 5000)  
+    setTimeout (clearGrid, 5000);
 }
 
 function disableGrid(){
 for(let i =0; i < grid.length; i++){grid[i].disabled = 'true'}
 }
+
+function messge(text, time){
+msgBox.style.display = 'block';
+message.innerHTML = text;
+}
+
+for(let i =0; i < grid.length; i++){
+grid[i].addEventListener('mouseover', () => {suggest(i, turn)} );
+grid[i].addEventListener('mouseleave', (e) => {desuggest(e)});
+}
+
+function suggest(i, turn){
+if(turn%2 == 0){
+    if(!grid[i].innerHTML){
+    grid[i].innerHTML = 'O';}else{
+        }
+}else{
+    grid[i].innerHTML = 'X';
+}
+}
+
+function desuggest(e){e.target.innerHTML = '';}
+
+
+function clearGrid(){
+for(let i = 0; i < grid.length; i++){
+    grid[i].innerHTML = '';
+    grid[i].disabled ='false';
+    grid[i].value ='';
+    grid[i].style.background = 'white' ;
+}
+}
+
+document.onload = checkPreviousPlayer();
 </script>
 
 </body>
