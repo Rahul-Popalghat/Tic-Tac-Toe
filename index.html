@@ -34,9 +34,12 @@ input{text-align: center; background: royalblue; color: white;}
 button:disabled > .player2 {background:rgba(100 ,0 , 0,1);}
 button:disabled > .player1 {background:royalblue; }
 
+
+
 @media screen and (max-width: 600px) {
   #frm{width:95vw;}
 }
+
 
 </style>
 
@@ -109,6 +112,8 @@ var count =0;
 var count1 = 0;
 var turn = '';
 
+
+
 function checkPreviousPlayer(){
 if(Player1.value != savedPlayer1){
     Player1.value = savedPlayer1;
@@ -118,14 +123,25 @@ if(Player2.value != savedPlayer2){
 }
 }
 
+
 playAgainBtn.addEventListener('click', resetgame);
+
+
+
+
+
+
+
+
 
 startBtn.addEventListener('click' , startgame);
 resetBtn.addEventListener('click', resetgame);
 
+
 function resetgame(){
     window.location.reload();
 }
+
 
 function startgame(e){
 dummy.style.display = 'none';
@@ -138,6 +154,9 @@ winner1 = Player1.value;
 winner2 = Player2.value;
 
 }
+
+
+
 
 Player1.onchange = function(){
 if(!Player1.value){this.value = 'Player 1'}
@@ -152,8 +171,10 @@ for(let i =0; i < grid.length; i++){
 grid[i].addEventListener('click', addvalue);
 }
 
+
 function addvalue(e){
 count += 1;
+
 
 var target = e.target;
 if(count%2 == 0 && e.target.value == '' ){
